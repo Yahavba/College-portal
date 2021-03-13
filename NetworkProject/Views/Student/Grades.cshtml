@@ -1,0 +1,46 @@
+﻿@model NetworkProject.Models.GradeList
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Grades</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <h1 class="display-1 text-center"> Grades </h1>
+        </div>
+        <hr />
+        <br />
+        <div class="row">
+            <table class="table table-bordered table-responsive table-hover">
+                <thead>
+                    <tr>
+                        <td> Course Name </td>
+                        <td> Grade </td>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var grade in Model.grades)
+                    {
+                    <tr>
+                        <td> @grade.courseName </td>
+                        <td> @grade.grade </td>
+                    </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+</body>
+</html>

@@ -1,0 +1,97 @@
+﻿@model NetworkProject.Models.CoursesAndStudents
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>MyStudents</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <h1 class="display-1 text-center"> My Students </h1>
+        </div>
+        <hr />
+        <br />
+        <div class="row">
+            <div class="col-xs-4"></div>
+            <div class="col-xs-4">
+                <form class="form-inline" action="SearchStudents" method="post" style="width:100%;">
+                    <div class="row">
+                        <div class="col-xs-4">
+                            <input type="text" name="CourseID" placeholder="Course ID" class="form-control" style="min-width:100%;" />
+                        </div>
+                        <div class="col-xs-4"></div>
+                        <div class="col-xs-4">
+                            <input type="submit" value="Search" class="btn btn-primary btn-block" style="min-width:100%;" />
+                        </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-6">
+                                @if (TempData["msg"] != null)
+                                {
+                                    <p style="color:red;"> @TempData["msg"] </p>
+                                }
+                            </div>
+                            <div class="col-xs-6"> </div>
+                        </div>
+                </form>
+            </div>
+            <div class="col-xs-4"></div>
+        </div>
+        <br />
+        <br />
+        <div class="row">
+            <div class="col-xs-6">
+                <table class="table table-bordered table-responsive table-hover">
+                    <thead>
+                        <tr>
+                            <td> Course ID </td>
+                            <td> Course Name </td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var course in Model.Courses)
+                        {
+                        <tr>
+                            <td> @course.courseId </td>
+                            <td> @course.courseName </td>
+                        </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-xs-6">
+                <table class="table table-bordered table-responsive table-hover">
+                    <thead>
+                        <tr>
+                            <td> Student ID </td>
+                            <td> First Name </td>
+                            <td> Last Name </td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var user in Model.users)
+                        {
+                        <tr>
+                            <td> @user.ID </td>
+                            <td> @user.name </td>
+                            <td> @user.lastName </td>
+                        </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+</body>
+</html>

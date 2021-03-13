@@ -1,0 +1,59 @@
+﻿@model NetworkProject.Models.User
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>Login</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    <script src="~/Scripts/jquery-3.3.1.js"></script>
+    <script src="~/Scripts/jquery.validate.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+</head>
+
+<body style="background-color:#598aa8; color: white;">
+    <div class="container">
+        <div class="row text-center">
+            <h1> Software Engineering Portal </h1>
+        </div>
+        <hr />
+        <br />
+        <br />
+        <div class="row">
+            <div class="col-xs-4"></div>
+            <div class="col-xs-4" style="border:solid 1px #17252A; border-radius: 5px; background-color:#FEFFFF; color: black;">
+                <h3> Login </h3>
+                <hr />
+                <form action="SubmitLogin" method="post" style="width:100%;">
+                    <div class="form-group">
+                        @Html.TextBoxFor(x => x.ID, new { Class = "form-control", Style = "min-width:100%;", placeholder = "ID"})
+                        @Html.ValidationMessageFor(y => y.ID,"", new { Style = "color: red;"})
+                    </div>
+                    <div class="form-group">
+                        @Html.PasswordFor(x => x.password, new { Class = "form-control", Style = "min-width:100%;", placeholder = "Password" })
+                        @Html.ValidationMessageFor(y => y.password, "", new { Style = "color: red;" })
+                    </div>
+                    @if (TempData["loginMsg"] != null)
+                    {
+                        <p style="color: red;"> @TempData["loginMsg"] </p>
+                    }
+                    <div class="form-group">
+                        <input type="submit" value="Login" class="btn btn-primary btn-block" style="min-width:100%;" />
+                    </div>
+                </form>
+            </div>
+            <div class="col-xs-4"></div>
+        </div>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+</body>
+</html>

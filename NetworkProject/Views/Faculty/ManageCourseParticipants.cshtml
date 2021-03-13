@@ -1,0 +1,61 @@
+﻿@model NetworkProject.Models.CourseParticipant
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>ManageCourseParticipants</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    <script src="~/Scripts/jquery-3.3.1.js"></script>
+    <script src="~/Scripts/jquery.validate.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <h1 class="display-1 text-center"> Manage Course Participants </h1>
+        </div>
+        <hr />
+        <br />
+        <div class="row">
+            <div class="col-xs-3"></div>
+            <div class="col-xs-6" style="border:solid 1px #17252A; border-radius: 5px; background-color:#FEFFFF;">
+                <h3> Add Student To Course </h3>
+                <hr />
+                <form action="SubmitParticipant" method="post" style="width:100%;">
+                    <div class="form-group">
+                        @Html.TextBoxFor(x => x.ID, new { Class = "form-control", Style = "min-width:100%;", placeholder = "Student ID", Value = Model.ID })
+                        @Html.ValidationMessageFor(y => y.ID, "", new { Style = "color: red;" })
+                    </div>
+                    <div class="form-group">
+                        @Html.TextBoxFor(x => x.courseId, new { Class = "form-control", Style = "min-width:100%;", placeholder = "Course ID", Value = Model.courseId })
+                        @Html.ValidationMessageFor(y => y.courseId, "", new { Style = "color: red;" })
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" value="Add Student" class="btn btn-primary btn-block" style="min-width:100%;" />
+                    </div>
+                    <div>
+                        @if (TempData["msg"] != null)
+                        {
+                            <p style="color:red;"> @TempData["msg"] </p>
+                        }
+                        @if (TempData["goodMsg"] != null)
+                        {
+                            <p class="text-success"> @TempData["goodMsg"] </p>
+                        }
+                    </div>
+                </form>
+            </div>
+            <div class="col-xs-3"></div>
+        </div>
+    </div>
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+</body>
+</html>
+

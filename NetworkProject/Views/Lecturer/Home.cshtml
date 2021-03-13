@@ -1,0 +1,76 @@
+﻿@model NetworkProject.Models.User
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>LecturerHome</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body style="background-color:#598aa8; color: white;">
+    <div class="container">
+        <div class="row">
+            <h1 class="display-1 text-center"> Welcome Back @Session["name"] @Session["lastName"] </h1>
+            <h3 class="display-1 text-center"> @DateTime.Now.ToShortDateString() </h3>
+        </div>
+        <br />
+        <div class="row">
+            <div>
+                <iframe src="@Url.Action("Schedule","Lecturer")" style="width:100%; height:250px; border: 1px solid #17252A;">
+                    <p> Your Browser doesnt support iframe please change browser</p>
+                </iframe>
+                <br />
+                <a href="@Url.Action("Schedule","Lecturer")" target="_self" style="color: white"> Full Schedule </a>
+            </div>
+        </div>
+        <div class="row">
+            <br />
+            <div>
+                <iframe src="@Url.Action("MyStudents","Lecturer")" style="width:100%; height:250px; border: 1px solid #17252A;">
+                    <p> Your Browser doesnt support iframe please change browser</p>
+                </iframe>
+                <br />
+                <a href="@Url.Action("MyStudents","Lecturer")" target="_self" style="color: white"> Full Student List </a>
+            </div>
+        </div>
+        <div class="row">
+            <br />
+            <div>
+                <iframe src="@Url.Action("Grades","Lecturer")" style="width:100%; height:250px; border: 1px solid #17252A;">
+                    <p> Your Browser doesnt support iframe please change browser</p>
+                </iframe>
+                <br />
+                <a href="@Url.Action("Grades","Lecturer")" target="_self" style="color: white"> Full Grades </a>
+            </div>
+        </div>
+        <div class="row">
+            <div>
+                <iframe src="@Url.Action("InsertGrades","Lecturer")" style="width:100%; height:250px; border: 1px solid #17252A;">
+                    <p> Your Browser doesnt support iframe please change browser</p>
+                </iframe>
+                <br />
+                <a href="@Url.Action("InsertGrades","Lecturer")" target="_self" style="color: white"> Full Insert\Update Grade </a>
+            </div>
+            <br />
+        </div>
+        <div class="row">
+            <div>
+                <iframe src="@Url.Action("Chat","Chat")" style="width:100%; height:250px; border: 1px solid #17252A;">
+                    <p> Your Browser doesnt support iframe please change browser</p>
+                </iframe>
+                <br />
+                <a href="@Url.Action("Chat","Chat")" target="_self" style="color: white"> Full Chat </a>
+            </div>
+            <br />
+        </div>
+    </div>
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+</body>
+</html>

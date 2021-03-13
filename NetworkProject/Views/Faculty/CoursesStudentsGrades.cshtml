@@ -1,0 +1,103 @@
+﻿@model NetworkProject.Models.CoursesStudentsGrades
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Data</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <h1 class="display-1 text-center"> Helpful Data </h1>
+        </div>
+        <hr />
+        <br />
+        <div class="row">
+            <h3> Courses </h3>
+            <table class="table table-bordered table-responsive table-hover">
+                <thead>
+                    <tr>
+                        <td> Course ID </td>
+                        <td> Course Name </td>
+                        <td> Start Time </td>
+                        <td> End Time </td>
+                        <td> Day </td>
+                        <td> Class Name </td>
+                        <td> Lecturer </td>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var course in Model.courses)
+                    {
+                    <tr>
+                        <td> @course.courseId </td>
+                        <td> @course.courseName </td>
+                        <td> @course.startTime</td>
+                        <td> @course.endTime </td>
+                        <td> @course.day </td>
+                        <td> @course.className </td>
+                        <td> @course.lecturer </td>
+
+                    </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+        <br />
+        <div class="row">
+            <h3> Students </h3>
+            <table class="table table-bordered table-responsive table-hover">
+                <thead>
+                    <tr>
+                        <td> Student ID </td>
+                        <td> First Name </td>
+                        <td> Last Name </td>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var user in Model.users)
+                    {
+                        <tr>
+                            <td> @user.ID </td>
+                            <td> @user.name </td>
+                            <td> @user.lastName </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+        <div class="row">
+            <h3> Grades </h3>
+            <table class="table table-bordered table-responsive table-hover">
+                <thead>
+                    <tr>
+                        <td> Student ID </td>
+                        <td> Moed </td>
+                        <td> Grade </td>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var grade in Model.grades)
+                    {
+                        <tr>
+                            <td> @grade.ID </td>
+                            <td> @grade.moed </td>
+                            <td> @grade.grade </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+</body>
+</html>

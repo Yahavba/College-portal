@@ -1,0 +1,55 @@
+﻿@model NetworkProject.Models.ExamList
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>Exams</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <h1 class="display-1 text-center"> Exams </h1>
+        </div>
+        <hr />
+        <br />
+        <div class="row">
+            <table class="table table-bordered table-responsive table-hover">
+                <thead>
+                    <tr>
+                        <td> Course Name </td>
+                        <td> Moed </td>
+                        <td> Date </td>
+                        <td> Start Time </td>
+                        <td> End Time </td>
+                        <td> Class Name </td>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var exam in Model.exams)
+                    {
+                        <tr>
+                            <td> @exam.courseName </td>
+                            <td> @exam.moed </td>
+                            <td> @exam.date.ToString("dd/MM/yyyy") </td>
+                            <td> @exam.startTime </td>
+                            <td> @exam.endTime </td>
+                            <td> @exam.className </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+</body>
+</html>

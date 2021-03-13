@@ -1,0 +1,198 @@
+﻿@model NetworkProject.Models.UserList
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Chat</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    <style type="text/css">
+        .container {
+            background-color: #d3dbe0;
+            border: 2px solid black;
+            border-radius: 5px;
+            padding: 30px;
+            margin: 0px auto;
+        }
+        .boxHeight {
+            border-radius:5px;
+            height: 600px;
+            max-height: 600px;
+            padding: 0 10px;
+        }
+        .userBox {
+            border-radius: 5px;
+            height: 600px;
+            max-height: 600px;
+            padding: 10px;
+        }
+        .chatMessage {
+            background-color: white;
+            height: 550px;
+            max-height: 550px;
+        }
+        .left-div {
+            float: left;
+            clear: both;
+            background-color: #7bc4ef;
+            max-width: 300px;
+            width: 300px;
+            padding: 5px;
+            margin: 5px;
+            font-size: 17px;
+            text-align: left;
+            word-wrap: break-word;
+        }
+        .right-div {
+            float: right;
+            clear: both;
+            background-color: #62bf6e;
+            max-width: 300px;
+            width: 300px;
+            padding: 5px;
+            margin: 5px;
+            font-size: 17px;
+            text-align: left;
+            word-wrap: break-word;
+        }
+
+        .btn-focus {
+            border: solid 1px black;
+            background-color: #e6e6e6;
+        }
+
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        /* Track */
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+
+        /* Handle */
+        ::-webkit-scrollbar-thumb {
+            background: #888;
+        }
+
+        /* Handle on hover */
+            ::-webkit-scrollbar-thumb:hover {
+                background: #555;
+            }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="row text-center">
+            <h1> Online Chat </h1>
+        </div>
+        <hr />
+        <br />
+        <br />
+        <div class="row">
+            <div class="col-sm-3 col-4 userBox" style="background-color:#434753; overflow-y:scroll;">
+                @foreach (var x in Model.users)
+                {
+                    <button id="@x.ID" class="btn btn-block btn-default chatUser"> @x.name @x.lastName </button>
+                }
+            </div>
+
+            <div class="col-sm-9 col-8 boxHeight">
+                <div class="form-group">
+                    <ul class="list-group list-group-item chatMessage" id="discussion" style="overflow-y:scroll; padding:0px;" tabindex="1"></ul>
+                    <input type="hidden" id="endList"/>
+                </div>
+                <div class="row">
+                    <div class="col-xs-8">
+                        <input type="text" id="message" class="form-control" placeholder="Message" style="min-width:100%;" />
+                    </div>
+                    <div class="col-xs-4">
+                        <input type="button" id="sendmessage" value="Send" style="min-width:100%;" class="btn btn-block btn-primary" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <input type="hidden" id="displayname" value="@Session["name"]" />
+    <input type="hidden" id="displayId" value="@Session["ID"]" />
+
+    <!-- Scripts -->
+    @Scripts.Render("~/bundles/jquery")
+    <script src="~/Scripts/jquery.signalR-2.2.2.min.js"></script>
+    <script src="~/signalr/hubs"></script>
+    <script type="text/javascript">
+        $(function () {
+            // Reference the auto-generated proxy for the hub.
+            var chat = $.connection.chatHub;
+            var receiver = "";
+
+            /* set receiver when clicking on username */
+            $(".chatUser").click(function (event) {
+                receiver = event.target.id;
+                $('#discussion').empty();
+                $('.chatUser').removeClass('btn-focus');
+                $(this).addClass('btn-focus');
+
+                $.ajax({
+                    url: '@Url.Action("getChats")',
+                    type: 'GET',
+                    data: { "senderID": $('#displayId').val(), "recieverID": receiver},
+                    dataType: 'json',
+                    success: function (data) {
+                        // process the data coming back
+                        $.each(data, function (index, item) {
+                            if (item.senderId == $('#displayId').val()) {
+                                $('#discussion').append('<div class="left-div">' + '<li style="list-style:none;">' + item.message + '</li>' + '</div>');
+                            }
+                            else {
+                                $('#discussion').append('<div class="right-div">' + '<li style="list-style:none;">' + item.message + '</li>' + '</div>');
+                            }
+                        });
+                    },
+                    error: function (xhr, ajaxOptions, thrownError) {
+                        console.log(xhr.status);
+                        console.log(thrownError);
+                    }
+                });
+                $('#discussion').animate({ scrollTop: $('#discussion').last().offset().top });
+            });
+
+            $.connection.hub.qs = { "userName": $('#displayname').val(), "userId": $('#displayId').val() };
+
+            // Create a function that the hub can call back to display messages.
+            chat.client.appendMessage = function (id, message) {
+                // Add the message to the page.
+                if (id == $('#displayId').val()) {
+                    $('#discussion').append('<div class="left-div">' + '<li style="list-style:none;">' + message + '</li>' + '</div>');
+                }
+                else {
+                    if (id == receiver) {
+                        $('#discussion').append('<div class="right-div">' + '<li style="list-style:none;">' + message + '</li>' + '</div>');
+                    }
+                }
+            };
+
+            // Start the connection.
+            $.connection.hub.start().done(function () {
+                $('#sendmessage').click(function () {
+                    if (receiver != "") {
+                        // Call the Send method on the hub.
+                        chat.server.send(receiver, $('#message').val());
+                        chat.server.send($('#displayId').val(), $('#message').val());
+                        // Clear text box and reset focus for next comment.
+                        $('#message').val('').focus();
+                    }
+                    else {
+                        $('#message').val('').focus();
+                    }
+                });
+            });
+        });
+    </script>
+    @Scripts.Render("~/bundles/bootstrap")
+</body>
+</html>

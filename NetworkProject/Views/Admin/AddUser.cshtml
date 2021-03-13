@@ -1,0 +1,75 @@
+﻿@model NetworkProject.Models.User
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>User Managment</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    <script src="~/Scripts/jquery-3.3.1.js"></script>
+    <script src="~/Scripts/jquery.validate.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+</head>
+
+<body>
+    <div class="container">
+        <div class="row">
+            <h1 class="display-1 text-center"> Insert\Update User </h1>
+        </div>
+        <hr />
+        <br />
+        <div class="row">
+            <div class="col-xs-4"></div>
+            <div class="col-xs-4" style="border:solid 1px #17252A; border-radius: 5px; background-color:#FEFFFF;">
+                <form action="SubmitUser" method="post" style="width:100%; ">
+                    <h3> Insert\Update User </h3>
+                    <hr />
+                    <div class="form-group">
+                        @Html.TextBoxFor(x => x.ID, new { Class = "form-control", Style = "min-width:100%;", placeholder = "User ID", Value = Model.ID})
+                        @Html.ValidationMessageFor(y => y.ID, "", new { Style = "color: red;" })
+                    </div>
+                    <div class="form-group">
+                        @Html.TextBoxFor(x => x.name, new { Class = "form-control", Style = "min-width:100%;", placeholder = "User Name", Value = Model.name })
+                        @Html.ValidationMessageFor(y => y.name, "", new { Style = "color: red;" })
+                    </div>
+                    <div class="form-group">
+                        @Html.TextBoxFor(x => x.lastName, new { Class = "form-control", Style = "min-width:100%;", placeholder = "User Last Name", Value = Model.lastName })
+                        @Html.ValidationMessageFor(y => y.lastName, "", new { Style = "color: red;" })
+                    </div>
+                    <div class="form-group">
+                        @Html.TextBoxFor(x => x.password, new { Class = "form-control", Style = "min-width:100%;", placeholder = "Password", Value = Model.password })
+                        @Html.ValidationMessageFor(y => y.password, "", new { Style = "color: red;" })
+                    </div>
+                    <div class="form-group">
+                        @Html.TextBoxFor(x => x.type, new { Class = "form-control", Style = "min-width:100%;", placeholder = "User type", Value = Model.type })
+                        @Html.ValidationMessageFor(y => y.type, "", new { Style = "color: red;" })
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" value="Insert\Update User" class="btn btn-primary btn-block" style="min-width:100%;" />
+                    </div>
+                    <div>
+                        @if (TempData["msg"] != null)
+                        {
+                            <p style="color:red;"> @TempData["msg"] </p>
+                        }
+                        @if (TempData["goodMsg"] != null)
+                        {
+                            <p class="text-success"> @TempData["goodMsg"] </p>
+                        }
+                    </div>
+                </form>
+            </div>
+            <div class="col-xs-4"></div>
+        </div>
+    </div>
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+</body>
+
+</html>

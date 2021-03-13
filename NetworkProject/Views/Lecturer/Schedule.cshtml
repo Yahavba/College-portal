@@ -1,0 +1,223 @@
+﻿@model NetworkProject.Models.Schedule
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Schedule</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <h1 class="display-1 text-center"> Schedule </h1>
+        </div>
+        <hr />
+        <br />
+        <div>
+            <table class="table table-bordered table-responsive table-hover">
+                <thead>
+                    <tr>
+                        <td> Sunday </td>
+                    </tr>
+                    <tr>
+                        <td> Course ID </td>
+                        <td> Course Name </td>
+                        <td> Start Time  </td>
+                        <td> End Time </td>
+                        <td> Clase Name </td>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var course in Model.Sunday)
+                    {
+                    <tr>
+                        <td> @course.courseId </td>
+                        <td> @course.courseName </td>
+                        <td> @course.startTime </td>
+                        <td> @course.endTime </td>
+                        <td> @course.className </td>
+                    </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+        <div>
+            <table class="table table-bordered table-responsive table-hover">
+                <thead>
+                    <tr>
+                        <td> Monday </td>
+                    </tr>
+                    <tr>
+                        <td> Course ID </td>
+                        <td> Course Name </td>
+                        <td> Start Time  </td>
+                        <td> End Time </td>
+                        <td> Clase Name </td>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var course in Model.Monday)
+                    {
+                    <tr>
+                        <td> @course.courseId </td>
+                        <td> @course.courseName </td>
+                        <td> @course.startTime </td>
+                        <td> @course.endTime </td>
+                        <td> @course.className </td>
+                    </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+        <div>
+            <table class="table table-bordered table-responsive table-hover">
+                <thead>
+                    <tr>
+                        <td> Tuesday </td>
+                    </tr>
+                    <tr>
+                        <td> Course ID </td>
+                        <td> Course Name </td>
+                        <td> Start Time  </td>
+                        <td> End Time </td>
+                        <td> Clase Name </td>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var course in Model.Tuesday)
+                    {
+                    <tr>
+                        <td> @course.courseId </td>
+                        <td> @course.courseName </td>
+                        <td> @course.startTime </td>
+                        <td> @course.endTime </td>
+                        <td> @course.className </td>
+                    </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+        <div>
+            <table class="table table-bordered table-responsive table-hover">
+                <thead>
+                    <tr>
+                        <td> Wednesday </td>
+                    </tr>
+                    <tr>
+                        <td> Course ID </td>
+                        <td> Course Name </td>
+                        <td> Start Time  </td>
+                        <td> End Time </td>
+                        <td> Clase Name </td>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var course in Model.Wednesday)
+                    {
+                    <tr>
+                        <td> @course.courseId </td>
+                        <td> @course.courseName </td>
+                        <td> @course.startTime </td>
+                        <td> @course.endTime </td>
+                        <td> @course.className </td>
+                    </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+        <div>
+            <table class="table table-bordered table-responsive table-hover">
+                <thead>
+                    <tr>
+                        <td> Thursday </td>
+                    </tr>
+                    <tr>
+                        <td> Course ID </td>
+                        <td> Course Name </td>
+                        <td> Start Time  </td>
+                        <td> End Time </td>
+                        <td> Clase Name </td>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var course in Model.Thursday)
+                    {
+                    <tr>
+                        <td> @course.courseId </td>
+                        <td> @course.courseName </td>
+                        <td> @course.startTime </td>
+                        <td> @course.endTime </td>
+                        <td> @course.className </td>
+                    </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+        <div>
+            <table class="table table-bordered table-responsive table-hover">
+                <thead>
+                    <tr>
+                        <td> Friday </td>
+                    </tr>
+                    <tr>
+                        <td> Course ID </td>
+                        <td> Course Name </td>
+                        <td> Start Time  </td>
+                        <td> End Time </td>
+                        <td> Clase Name </td>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var course in Model.Friday)
+                    {
+                    <tr>
+                        <td> @course.courseId </td>
+                        <td> @course.courseName </td>
+                        <td> @course.startTime </td>
+                        <td> @course.endTime </td>
+                        <td> @course.className </td>
+                    </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+        <div>
+            <table class="table table-bordered table-responsive table-hover">
+                <thead>
+                    <tr>
+                        <td> Saturday </td>
+                    </tr>
+                    <tr>
+                        <td> Course ID </td>
+                        <td> Course Name </td>
+                        <td> Start Time  </td>
+                        <td> End Time </td>
+                        <td> Clase Name </td>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var course in Model.Saturday)
+                    {
+                    <tr>
+                        <td> @course.courseId </td>
+                        <td> @course.courseName </td>
+                        <td> @course.startTime </td>
+                        <td> @course.endTime </td>
+                        <td> @course.className </td>
+                    </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+</body>
+</html>
