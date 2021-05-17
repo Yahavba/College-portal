@@ -4,7 +4,7 @@
 
 An asp.net mvc college portal application.
 
-This Project was created with <b> asp.net MVC framework (only works on windows), html, css, javaScript, jQuery, signalR, SQL </b>.
+This Project was created with <b> asp.net MVC framework (only works on windows), html, css, javaScript, jQuery, signalR, SQL</b>.
 
 The project was tested only with visual studio.
 
